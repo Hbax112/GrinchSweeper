@@ -1,0 +1,63 @@
+def count_bombs():
+    for i in range(n):
+        for j in range(n):
+            if matrix[i][j] != 9:
+                # PARTEA DE JOS
+                if i + 1 < n and j - 1 >= 0:
+                    if matrix[i + 1][j - 1] == 9:
+                        matrix[i][j] = matrix[i][j] + 1
+                if i + 1 < n:
+                    if matrix[i + 1][j] == 9:
+                        matrix[i][j] = matrix[i][j] + 1
+                if i + 1 < n and j + 1 < n:
+                    if matrix[i + 1][j + 1] == 9:
+                        matrix[i][j] = matrix[i][j] + 1
+                # FINISH
+
+                # PARTEA DIN STANGA
+                if j - 1 >= 0:
+                    if matrix[i][j - 1] == 9:
+                        matrix[i][j] = matrix[i][j] + 1
+                # FINSIH
+
+                # PARTEA DE SUS
+                if i - 1 >= 0 and j - 1 >= 0:
+                    if matrix[i - 1][j - 1] == 9:
+                        matrix[i][j] = matrix[i][j] + 1
+                if i - 1 >= 0:
+                    if matrix[i - 1][j] == 9:
+                        matrix[i][j] = matrix[i][j] + 1
+                if i - 1 >= 0 and j + 1 < n:
+                    if matrix[i - 1][j + 1] == 9:
+                        matrix[i][j] = matrix[i][j] + 1
+                # FINISH
+
+                # PARTEA DIN DREAPTA 
+                if j + 1 < n:
+                    if matrix[i][j + 1] == 9:
+                        matrix[i][j] = matrix[i][j] + 1
+            # FINISH
+
+
+def reveal_function(i, j):
+    if i >= 0 and j >= 0:
+        if matrix[i][j] not in (1, 2, 3, 4, 5, 6, 7, 8, 9):
+            matrix[i][j] = 1
+            try:
+                reveal_function(i - 1, j)
+            except Exception as e:
+                logging.exception(e)
+            try:
+                reveal_function(i, j + 1)
+            except Exception as e:
+                logging.exception(e)
+            try:
+                reveal_function(i + 1, j)
+            except Exception as e:
+                logging.exception(e)
+            try:
+                reveal_function(i, j - 1)
+            except Exception as e:
+                logging.exception(e)
+        else:
+            pass
